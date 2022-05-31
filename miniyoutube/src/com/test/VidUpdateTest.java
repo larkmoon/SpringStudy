@@ -1,8 +1,5 @@
 package com.test;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -17,11 +14,9 @@ public class VidUpdateTest {
 		Service<String,VidVO> service = 
 				(Service<String, VidVO>) factory.getBean("vservice");
 		
-		SimpleDateFormat sysdate = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date date = new java.util.Date();
-		
-		Date d = Date.valueOf(sysdate.format(date));
-		VidVO v = new VidVO(4, "Feel My Rhythm MV", d);
+
+		VidVO v = new VidVO(30, "Peekaboo MV");
+	
 		try{
 			service.modify(v);
 		}catch(Exception e) {

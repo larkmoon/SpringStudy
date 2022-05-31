@@ -18,7 +18,11 @@ public class VidSelectAllTest {
 				(Service<Integer, VidVO>) factory.getBean("vservice");
 		
 		List<VidVO> list = null;
-		list = service.get();
+		try {
+			list = service.get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		for (VidVO vidVO : list) {
 			System.out.println(vidVO);

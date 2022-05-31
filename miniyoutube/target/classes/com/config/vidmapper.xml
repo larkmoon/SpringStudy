@@ -12,15 +12,26 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM VID 
 	</select>
 	<insert id="insert" parameterType="vid">
-		INSERT INTO VID VALUES (#{id},#{title},#{regdate})
+		INSERT INTO VID VALUES (#{id},#{title},#{regdate},#{views},#{likes})
 	</insert>
-	<update id="update" parameterType="vid">
-		UPDATE VID SET TITLE=#{title},REGDATE=#{regdate} WHERE ID=#{id}
+	<update id="increaseview" parameterType="vid">
+		UPDATE VID SET VIEWS=#{views} WHERE ID=#{id}
+	</update>
+		<update id="update" parameterType="vid">
+		UPDATE VID SET TITLE=#{title} WHERE ID=#{id}
 	</update>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM VID WHERE ID=#{obj}
 	</delete>
-	
+	<select id="searchtitle" parameterType="String" resultType="vid">
+		SELECT * FROM VID WHERE title LIKE CONCAT('%',#{title},'%')
+	</select>
+	<select id="searchviews" parameterType="Double" resultType="vid">
+		SELECT * FROM VID WHERE views > #{views}
+	</select>
+	<select id="searchdate" parameterType="Date" resultType="vid">
+		SELECT * FROM VID WHERE regdate > #{regdate}
+	</select>
 </mapper>
 
 

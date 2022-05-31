@@ -21,15 +21,22 @@ public class VidInsertTest {
 		
 		SimpleDateFormat sysdate = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date date = new java.util.Date();
-		
 		Date d = Date.valueOf(sysdate.format(date));
-		VidVO v = new VidVO(6, "Summer Feelings", d);
 		
-		
-		try{
+		VidVO v = new VidVO(null, "Feel My Rhythm MV", d, 30000.0, 2345.0);
+
+		try {
 			service.register(v);
-		}catch(Exception e){
-			System.out.println(e.getMessage());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		
+		
+//		try{
+//			service.register(v);
+//		}catch(Exception e){
+//			System.out.println(e.getMessage());
+//		}
 	}
 }

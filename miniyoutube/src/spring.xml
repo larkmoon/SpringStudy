@@ -35,14 +35,17 @@
  		<property name="dataSource" ref="dataSource"/>
  		<property name="configLocation" value="classpath:com/config/mybatis.xml"/>
  	</bean>
+ 	
+ 	<!-- 3-1. Mapper Setting -->
+ 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+ 		<property name="basePackage" value="com.mapper"/>
+ 	</bean>
+ 	
  	<!-- 4. Spring Mybatis Connect -->
  	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
  		<constructor-arg ref="sqlSessionFactory"/>
  	</bean>
- 	<!-- 5. Mapper Setting -->
- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
- 		<property name="basePackage" value="com.mapper"/>
- 	</bean>
+
  
 </beans>
 

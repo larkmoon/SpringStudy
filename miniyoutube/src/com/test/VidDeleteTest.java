@@ -16,7 +16,7 @@ public class VidDeleteTest {
 				(Service<Integer, VidVO>) factory.getBean("vservice");
 		
 		try{
-			service.remove(7);
+			service.remove(21);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}

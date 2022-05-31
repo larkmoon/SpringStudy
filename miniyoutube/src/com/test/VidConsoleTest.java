@@ -24,12 +24,9 @@ public class VidConsoleTest {
 		
 		while(true) {
 			System.out.printf("Welcome to Youtube!\n"
-					+ "To Upload: u\n"
-					+ "To Delete: d\n"
-					+ "To Modify: m\n"
-					+ "To Watch: w\n"
-					+ "To Get Playlist: l\n"
-					+ "To quit: q\n"
+					+ "To Upload: u / To Delete: d\n"
+					+ "To Modify: m / To Watch: w\n"
+					+ "To Get Playlist: l / To quit: q\n"
 					+ "------------\n");
 			String cmd = sc.nextLine();
 			
@@ -45,7 +42,7 @@ public class VidConsoleTest {
 				java.util.Date date = new java.util.Date();
 				
 				Date d = Date.valueOf(sysdate.format(date));
-				VidVO v = new VidVO(null, title, d);
+				VidVO v = new VidVO(null, title, d, 0.0, 0.0);
 				
 				try{
 					service.register(v);
@@ -59,27 +56,23 @@ public class VidConsoleTest {
 				System.out.println("Enter Video ID");
 				String stid = sc.next();
 				int id = Integer.parseInt(stid);
-				VidVO v = null;
-				v = service.get(id);
 				
 				try{
 					service.remove(id);
-					System.out.println("Deleted Video " + v + "\n" + "------------\n");
+					System.out.println("Deleted Video ID" + id + "\n" + "------------\n");
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
 				}
 			
 			}else if(cmd.equals("m")) {
 				System.out.println("Enter Video ID");
-				String strid = sc.next();
+				String strid = sc.nextLine();
 				int id = Integer.parseInt(strid);
-				System.out.println("Enter Video Title");
-				String title = sc.next();
-				SimpleDateFormat sysdate = new SimpleDateFormat("yyyy-MM-dd");
-				java.util.Date date = new java.util.Date();
-				Date d = Date.valueOf(sysdate.format(date));
 				
-				VidVO v = new VidVO(id, title, d);
+				System.out.println("Enter Video Title");
+				String title = sc.nextLine();
+				
+				VidVO v = new VidVO(id, title);
 				try{
 					service.modify(v);
 				}catch(Exception e) {
@@ -88,16 +81,25 @@ public class VidConsoleTest {
 				
 			}else if(cmd.equals("w")) {
 				System.out.println("Enter Video ID");
-				String stid = sc.next();
+				String stid = sc.nextLine();
 				int id = Integer.parseInt(stid);
 				
 				VidVO v = null;
-				v = service.get(id);
-				System.out.println("Playing " + v + "\n" + "------------\n");
+	
+				try{
+					service.watch(id);
+					System.out.println("Playing " + (service.get(id)).getTitle() + "\n" + "------------\n");
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 			}else if(cmd.equals("l")) {
 				List<VidVO> list = null;
-				list = service.get();
+				try {
+					list = service.get();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.printf("My Playlist\n" + "------------\n");
 				for (VidVO vidVO : list) {
 					System.out.println(vidVO);

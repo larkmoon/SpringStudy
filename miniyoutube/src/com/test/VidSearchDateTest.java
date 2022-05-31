@@ -1,31 +1,35 @@
 package com.test;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.frame.Service;
+import com.service.VidService;
 import com.vo.VidVO;
 
-public class VidSelecttTest {
+public class VidSearchDateTest {
 
 	public static void main(String[] args) {
 		ApplicationContext factory =
 				new ClassPathXmlApplicationContext("spring.xml");
 		
-		Service<Integer,VidVO> service = 
-				(Service<Integer, VidVO>) factory.getBean("vservice");
+		VidService service = 
+				(VidService) factory.getBean("vservice");
 		
+		Date d = Date.valueOf("2022-05-05");
 		
-		VidVO v = null;
-		
+		List<VidVO> list = null;
 		try {
-			v = service.get(30);
-			VidVO v2 = new VidVO(v.getId(), v.getViews() + 1);
-			service.increaseview(v2);
-			System.out.println(v2);
+			list = service.searchdate(d);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		for (VidVO vidVO : list) {
+			System.out.println(vidVO);
+		}
 	}
 }

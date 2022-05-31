@@ -1,31 +1,31 @@
 package com.test;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.frame.Service;
+import com.service.VidService;
 import com.vo.VidVO;
 
-public class VidSelecttTest {
+public class VidSearchViewsTest {
 
 	public static void main(String[] args) {
 		ApplicationContext factory =
 				new ClassPathXmlApplicationContext("spring.xml");
 		
-		Service<Integer,VidVO> service = 
-				(Service<Integer, VidVO>) factory.getBean("vservice");
+		VidService service = 
+				(VidService) factory.getBean("vservice");
 		
-		
-		VidVO v = null;
-		
+		List<VidVO> list = null;
 		try {
-			v = service.get(30);
-			VidVO v2 = new VidVO(v.getId(), v.getViews() + 1);
-			service.increaseview(v2);
-			System.out.println(v2);
+			list = service.searchviews(20000.0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		for (VidVO vidVO : list) {
+			System.out.println(vidVO);
+		}
 	}
 }
