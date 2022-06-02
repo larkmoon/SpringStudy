@@ -10,8 +10,7 @@ public interface Service<K,V> {
 	public void modify(V v) throws Exception;
 	public V get(K k) throws Exception;
 	public List<V> get() throws Exception;
-	public void increaseview(VidVO obj) throws Exception;
-	public VidVO watch(K k) throws Exception;
+	
 	
 	
 }

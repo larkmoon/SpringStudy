@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.frame.Service;
+import com.service.VidService;
 import com.vo.VidVO;
 
 public class VidConsoleTest {
@@ -87,7 +88,8 @@ public class VidConsoleTest {
 				VidVO v = null;
 	
 				try{
-					service.watch(id);
+					VidService service2 = (VidService) factory.getBean("vservice");
+					service2.watch(id);
 					System.out.println("Playing " + (service.get(id)).getTitle() + "\n" + "------------\n");
 				}catch (Exception e) {
 					e.printStackTrace();

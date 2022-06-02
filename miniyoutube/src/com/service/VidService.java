@@ -56,13 +56,12 @@ public class VidService implements Service<Integer, VidVO>{
 		dao.increaseview(v);
 	}
 
-	@Override
-	public VidVO watch(Integer k) throws Exception {
+	public VidVO watch(Integer k) throws Exception{
 		VidVO v = dao.select(k);
 		VidVO v2 = new VidVO(k, v.getViews() + 1);
 		dao.increaseview(v2);
 		return dao.select(k);
 	}
-
+	
 
 }

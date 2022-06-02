@@ -20,9 +20,7 @@ public class VidSelecttTest {
 		
 		try {
 			v = service.get(30);
-			VidVO v2 = new VidVO(v.getId(), v.getViews() + 1);
-			service.increaseview(v2);
-			System.out.println(v2);
+			System.out.println(v);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
